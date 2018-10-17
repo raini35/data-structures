@@ -104,16 +104,47 @@ class SList {
   }
 
   insert(index, value) {
-    var counter = 0;
+    var counter = 1;
+    var currentNode = this._head._next;
+    var newNode = new SListNode(value);
+
+    if(index == 0) {
+        newNode.next = this._head;
+        this._head = newNode;
+        return;
+    } else {
+      while(counter !== index -1) {
+        currentNode = currentNode.next;
+      }
+    }
 
   }
 
   erase(index) {
+    var counter = 1;
+    var prevNode = this._head;
+    var currentNode = this._head._next;
+    if (index > this._size) {
+      return "Error: Out of bounds";
+    }
 
+    if(index == 0) {
+      this._head = currentNode;
+    } else {
+      while (counter !== index) {
+        prevNode = currentNode;
+        currentNode = currentNode.next;
+        counter = counter + 1;
+      }
+
+      prevNode.next = currentNode.next;
+
+      return;
+    }
   }
 
   valueNFromEnd(n) {
-
+    
   }
 
   reverse() {
