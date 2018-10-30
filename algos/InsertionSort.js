@@ -1,16 +1,36 @@
+// INSERTION SORT: Using a while loop
+// function insertionSort(input) {
+//   var lastSortedIndex = 0;
+//   while (lastSortedIndex < input.length) {
+//     var current = lastSortedIndex;
+//     for(var i = lastSortedIndex - 1 ; i >= 0; i--) {
+//       if(input[i] >= input[current]) {
+//         swap(input, current, i);
+//         current--;
+//       }
+//       else {
+//         break;
+//       }
+//     }
+//     lastSortedIndex++
+//   }
+//   return input
+// }
+
 function insertionSort(input) {
-  var lastSortedIndex = 0;
-  while (lastSortedIndex <= input.length - 1) {
-    var current = lastSortedIndex;
-    for(var i = lastSortedIndex - 1 ; i >= 0; i--) {
-      if(input[i] >= input[current]) {
-        swap(input, current, i);
-        current--;
+  var currentPos;
+  for(var i = 0; i < input.length; i++) {
+    currentPos = i;
+    for(var j = i - 1; j >= 0; j--) {
+      if(input[j] >= input[currentPos]) {
+        swap(input, j, currentPos)
+        currentPos = j;
+      } else {
+        break;
       }
     }
-    lastSortedIndex++
   }
-  return input
+  return input;
 }
 
 function swap(array, i, j) {
@@ -20,5 +40,4 @@ function swap(array, i, j) {
   return;
 }
 
-var input = [5,4,3,2,1]
-console.log(insertionSort(input));
+export {insertionSort}; 
