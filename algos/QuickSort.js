@@ -84,26 +84,21 @@
 //     return (i + 1)
 // }
 
-function swap(input, i, j) {
-  var temp = input[i];
-  input[i] = input[j];
-  input[j] = temp;
-}
-
 function quickSort(input) {
   qSort(input, 0, input.length - 1);
   return input;
 }
 
+// The start and end never changes. The partition is actually the one that divides it up. 
 function qSort(input, start, end) {
   if(start < end) {
-    var p = partition(input, start, end);
+    var p = getPartition(input, start, end);
     qSort(input, start, p - 1);
     qSort(input, p + 1, end);
   }
 }
 
-function partition(input, start, end) {
+function getPartition(input, start, end) {
   var pivot = input[end];
   var low = start - 1;
   for(var i = start; i <= end - 1; i++) {
@@ -116,6 +111,12 @@ function partition(input, start, end) {
   swap(input, low + 1, end);
 
   return low + 1
+}
+
+function swap(input, i, j) {
+  var temp = input[i];
+  input[i] = input[j];
+  input[j] = temp;
 }
 
 var input = [4,5,2,1,3];
