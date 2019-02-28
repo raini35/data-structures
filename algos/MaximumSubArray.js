@@ -1,15 +1,16 @@
-function maxSubArray(arr) {
-    return maxSubRecurse(arr, index, 0);
-}
+function maxSubArray(nums) {
+    let sum = 0;
+    let ans = -Infinity;
 
-function maxSubRecurse(arr, index, sum) {
-    if(index == arr.length) {
-        return 0;
+    for(var i = 0; i < nums.length; i++) {
+        let current = nums[i];
+        
+        sum = current > sum + current ? current : sum + current;
+        ans = Math.max(ans, sum);
+
     }
 
-    let option1 = arr[index];
-    let option2 = maxSubRecurse(arr, index + 1, sum + arr[index]);
-    let option3 = maxSubRecurse(arr, index + 1, num[index]);
-
-    return Math.max(option1, Math.max(option2, option3));
+    return ans;
 }
+
+console.log(maxSubArray([-3,2,3]));
