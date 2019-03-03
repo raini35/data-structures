@@ -10,7 +10,7 @@ function prettyDecimal(denominator, numerator) {
 
   let history = {}
   
-  let decimals = decimalRecurse(remainder, denominator, "", remainder, history);
+  let decimals = decimalRecurse(remainder * 10, denominator, "", remainder, history);
   
   return whole + decimals;
 }
@@ -20,21 +20,17 @@ function decimalRecurse(numerator, denominator, decimals, remainder, container) 
     return "." + decimals;
   }
 
-  numerator *= 10;
   let quotient = Math.floor(numerator / denominator);
-  
-  if(container[quotient]) {
-    console.log(quotient)
-    console.log(numerator)
-    if(container[quotient][numerator]) {
-      console.log("ENTERING")
-      return '.|' + decimals + '|';
-    }
-  }
 
   let product = quotient * denominator;
 
   remainder = numerator - product;
+
+  if(container[quotient]) {
+    if(container[quotient][remainder]) {
+      return '.|' + decimals + '|';
+    }
+  }
 
   decimals += quotient;
   
@@ -45,10 +41,8 @@ function decimalRecurse(numerator, denominator, decimals, remainder, container) 
     container[quotient][remainder] = true;
   }
 
-  console.log(container)
-
-  return decimalRecurse(remainder, denominator, decimals, remainder, container);
+  return decimalRecurse(remainder * 10, denominator, decimals, remainder, container);
 }
 
 
-console.log(prettyDecimal(3, 2))
+console.log(prettyDecimal(11, 1))
